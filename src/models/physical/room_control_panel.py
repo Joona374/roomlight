@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
 class RoomControlPanel:
     def __init__(self, parent: Room) -> None:
-        self.hardware_id: str = str(uuid.uuid4())
+        self.hardware_id: str = f"PANEL_{str(uuid.uuid4())}"
         self.belongs_to: Room = parent
         self.connected_lights: dict[str, LightUnit] = {}
 
