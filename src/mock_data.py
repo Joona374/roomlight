@@ -24,15 +24,15 @@ def add_mock_floors_to_property(property: Property, n_of_floors: int) -> None:
 
 
 def add_mock_conference_rooms_to_floor(floor: Floor, count: int) -> None:
-    for i in range(count):
-        room_id = f"CONF-{floor.level}-{i}"
-        room = Room(room_id, RoomType.CONFERENCE)
+    for i in range(1, count + 1):
+        room_id = f"CONF-{i}"
+        room = Room(room_id, RoomType.CONFERENCE, floor.level, i)
         floor.add_room(room)
 
 
 def add_mock_rooms_to_floor(floor: Floor, rooms_per_floor: int) -> None:
-    for i in range(rooms_per_floor):
+    for i in range(1, rooms_per_floor + 1):
         room_type = RoomType.SUITE if i % 5 == 0 else RoomType.NORMAL
         room_id = f"ROOM-{floor.level}-{i}{" (SUITE)" if room_type == RoomType.SUITE else ""}"
-        room = Room(room_id, room_type)
+        room = Room(room_id, room_type, floor.level, i)
         floor.add_room(room)

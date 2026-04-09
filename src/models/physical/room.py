@@ -4,8 +4,11 @@ from src.models.physical.room_control_panel import RoomControlPanel
 
 
 class Room:
-    def __init__(self, id: str, type: RoomType) -> None:
+
+    def __init__(self, id: str, type: RoomType, floor: int, room_number: int) -> None:
         self.id: str = id
+        self.floor: int = floor
+        self.number: int = room_number
         self.type: RoomType = type
 
         self.control_panel: RoomControlPanel = self.generate_mock_control_panel()
