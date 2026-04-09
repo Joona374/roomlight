@@ -18,9 +18,10 @@
       "Bedroom",
       "Bathroom",
       "Living",
-      "Desk"
+      "Desk",
+      "Extra"
     ],
-    "light_count": 5
+    "light_count": 6
   },
   {
     "id": "conference",

@@ -2,7 +2,7 @@ from textual.widget import Widget
 from textual.containers import Container, Vertical, Horizontal
 from textual.widgets import Tree, Label, Button
 
-from src.tui.widgets import RoomVisualizer, BrightnessDownButton, BrightnessUpButton
+from src.tui.views.physical_view.widgets import RoomVisualizer, BrightnessDownButton, BrightnessUpButton
 
 
 class PhysicalView(Container):

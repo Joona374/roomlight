@@ -21,5 +21,5 @@ if __name__ == "__main__":
     # RoomLightApp is a visual demo representation of the systems behaviour.
     # It attempts to visualize both the actual physical state of the hotel (lighting states and controll panels in different rooms) seen by guests,
     # and the functionality RoomLightSystem offers to the staff of the hotel.
-    app = RoomLightApp(property_data=hotel_data)
+    app = RoomLightApp(property_data=hotel_data, roomlight=system)
     app.run()

@@ -43,8 +43,6 @@ class RoomVisualizer(Widget):
             return "🟢 HI "
 
     def render(self) -> Text:
-        # Keep rendering defensive so the demo still works even if
-        # a template label changes during development.
         lights = {
             label: self._light_indicator(label)
             for label in self.room.control_panel.connected_lights
