@@ -1,6 +1,7 @@
-from src.mock_data import create_mock_property, connect_mock_property_to_system
+from src.mock.mock_data import create_mock_property, connect_mock_property_to_system
 from src.models.logical.room_light_system import RoomLightSystem
 from src.tui.app import RoomLightApp
+from src.types.room_type_catalog import RoomTypeCatalog
 
 if __name__ == "__main__":
     # This models and represents the actual physical hardware and infrastructure of the hotel.

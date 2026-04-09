@@ -1,0 +1,39 @@
+[
+  {
+    "id": "standard",
+    "display_name": "Standard",
+    "light_labels": [
+      "Entry",
+      "Main",
+      "Bedside",
+      "Bathroom"
+    ],
+    "light_count": 4
+  },
+  {
+    "id": "suite",
+    "display_name": "Suite",
+    "light_labels": [
+      "Entry",
+      "Bedroom",
+      "Bathroom",
+      "Living",
+      "Desk"
+    ],
+    "light_count": 5
+  },
+  {
+    "id": "conference",
+    "display_name": "Conference Room",
+    "light_labels": [
+      "Entry",
+      "Bathroom",
+      "Rear",
+      "Center",
+      "Left",
+      "Right",
+      "Stage"
+    ],
+    "light_count": 7
+  }
+]

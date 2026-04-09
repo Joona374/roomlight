@@ -3,10 +3,11 @@ from src.models.logical.logical_room import LogicalRoom
 from src.models.logical.room_light_system import RoomLightSystem
 from src.models.physical.light_unit import LightUnit
 from src.models.physical.room_control_panel import RoomControlPanel
-from src.types import ROOM_CONFIGURATIONS, RoomType
 from src.models.physical.floor import Floor
 from src.models.physical.property import Property
 from src.models.physical.room import Room
+from src.types.room_type_catalog import ROOM_TYPE_CATALOG
+from src.types.types import RoomTypeId
 
 
 def create_mock_property(n_of_floors: int = 3, rooms_per_floor: int = 20) -> Property:
@@ -32,23 +33,27 @@ def add_mock_floors_to_property(property: Property, n_of_floors: int) -> None:
 def add_mock_conference_rooms_to_floor(floor: Floor, count: int) -> None:
     for i in range(1, count + 1):
         room_id = f"CONF-{i}"
-        room = build_mock_room(room_id, RoomType.CONFERENCE, floor.level, i)
+        room = build_mock_room(room_id, RoomTypeId("conference"), floor.level, i)
         floor.add_room(room)
 
 
 def add_mock_rooms_to_floor(floor: Floor, rooms_per_floor: int) -> None:
     for i in range(1, rooms_per_floor + 1):
         # Every fifth room is a suite so we can showcase multiple room templates (REQ-03)
-        room_type = RoomType.SUITE if i % 5 == 0 else RoomType.NORMAL
-        room_id = f"ROOM-{floor.level}-{i}{' (SUITE)' if room_type == RoomType.SUITE else ''}"
+        room_type = RoomTypeId("suite") if i % 5 == 0 else RoomTypeId("standard")
+        room_id = f"ROOM-{floor.level}-{i}{' (SUITE)' if room_type == RoomTypeId("suite") else ''}"
 
         room = build_mock_room(room_id, room_type, floor.level, i)
         floor.add_room(room)
 
 
-def build_mock_room(id: str, type: RoomType, floor: int, room_number: int) -> Room:
+def build_mock_room(id: str, type: RoomTypeId, floor: int, room_number: int) -> Room:
+    room_type = ROOM_TYPE_CATALOG.get_by_id(type)
+    if not room_type:
+        raise ValueError(f"Invalid room type id {type} for room {id}. Cannot build mock room.")
+    
     # 1. Pre build the correct number of light unites
-    light_units_in_room_type = ROOM_CONFIGURATIONS[type]["light_count"]
+    light_units_in_room_type = room_type.light_count
     light_units = [LightUnit() for _ in range(light_units_in_room_type)]
 
     # 2. Build the control panel
@@ -57,7 +62,7 @@ def build_mock_room(id: str, type: RoomType, floor: int, room_number: int) -> Ro
     # 3. Build the room and attach the panel to it, then connect the lights to the panel.
     room = Room(
         id=id,
-        type=type,
+        type_id=type,
         floor=floor,
         room_number=room_number,
         control_panel=panel,
@@ -67,7 +72,7 @@ def build_mock_room(id: str, type: RoomType, floor: int, room_number: int) -> Ro
 
     # 4. Connect the physical light units to the physical panel using the correct labels for this room type.
     for i, unit in enumerate(light_units):
-        label = ROOM_CONFIGURATIONS[type]["labels"][i]
+        label = room_type.light_labels[i]  # ROOM_CONFIGURATIONS
         panel.connect_light_unit(label, unit)
 
     return room
@@ -86,7 +91,7 @@ def connect_mock_property_to_system(property: Property, system: RoomLightSystem)
         system.register_floor(logical_floor)
 
         for room in floor.rooms:
-            logical_room = LogicalRoom(room.id, room.type, room.floor, room.number)
+            logical_room = LogicalRoom(room.id, room.type_id, room.floor, room.number)
             logical_floor.add_room(logical_room)
 
             room.control_panel.connect_to_roomlight_system(system)

@@ -1,6 +1,6 @@
 import uuid
 
-from src.types import Brightness
+from src.types.types import Brightness
 
 class LightUnit:
     """

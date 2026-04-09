@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+from src.types.room_type_catalog import ROOM_TYPE_CATALOG
 
 if TYPE_CHECKING:
     from src.models.logical.logical_room import LogicalRoom
@@ -15,4 +16,6 @@ class ConnectedPanel:
         self.panel.turn_lights_off()
 
     def __str__(self) -> str:
-        return f"ConnectedPanel(Room {self.room.floor_level}-{self.room.room_number} ({self.room.room_type.name}))"
+        room_type = ROOM_TYPE_CATALOG.get_by_id(self.room.room_type_id)
+        room_type_name = room_type.display_name if room_type else "Unknown Type"
+        return f"ConnectedPanel(Room {self.room.floor_level}-{self.room.room_number} ({room_type_name}))"

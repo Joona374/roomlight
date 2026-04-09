@@ -5,8 +5,8 @@ from rich.text import Text
 
 from src.models.physical.light_unit import LightUnit
 from src.models.physical.room import Room
-from src.types import RoomType
-from src.types import Brightness
+from src.types.types import RoomTypeId
+from src.types.types import Brightness
 
 
 class BrightnessDownButton(Button):
@@ -52,11 +52,11 @@ class RoomVisualizer(Widget):
 
         # Different layouts are rendered per room type to support the
         # "one system, many room shapes" message in the prototype demo.
-        if self.room.type == RoomType.SUITE:
+        if self.room.type_id == RoomTypeId("suite"):
             lines = self._render_suite(lights)
-        elif self.room.type == RoomType.CONFERENCE:
+        elif self.room.type_id == RoomTypeId("conference"):
             lines = self._render_conference_room(lights)
-        else:
+        elif self.room.type_id == RoomTypeId("standard"):
             lines = self._render_normal(lights)
 
         return Text("\n".join(lines))
@@ -115,3 +115,17 @@ class RoomVisualizer(Widget):
             f"│                              │",
             f"└───    ──────┴────────────────┘",
         ]
+
+    def _render_placeholder(self, l: dict) -> list[str]:
+        box = [
+            f"┌──────────────────────────────┐",
+            f"│                              │",
+            f"│     No visualizer available  │",
+            f"│     for this room type.      │",
+            f"│                              │",
+            f"└──────────────────────────────┘",
+        ]
+
+        for label, indicator in l.items():
+            box.append(f"{label}: {indicator}")
+        return box

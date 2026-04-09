@@ -1,7 +1,6 @@
 from src.models.logical.connected_panel import ConnectedPanel
 from src.models.logical.logical_floor import LogicalFloor
 from src.models.physical.room_control_panel import RoomControlPanel
-from src.types import RoomType
 
 
 class RoomLightSystem:
