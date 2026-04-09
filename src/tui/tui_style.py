@@ -2,6 +2,9 @@ TUI_STYLE = """
 Screen {
     layout: horizontal;
 }
+PhysicalView {
+    layout: horizontal;
+}
 #sidebar {
     width: 30;
     background: $panel;
