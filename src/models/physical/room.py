@@ -5,30 +5,18 @@ from src.models.physical.room_control_panel import RoomControlPanel
 
 class Room:
 
-    def __init__(self, id: str, type: RoomType, floor: int, room_number: int) -> None:
+    def __init__(
+        self,
+        id: str,
+        type: RoomType,
+        floor: int,
+        room_number: int,
+        control_panel: RoomControlPanel,
+        light_units: list[LightUnit],
+    ) -> None:
         self.id: str = id
         self.floor: int = floor
         self.number: int = room_number
         self.type: RoomType = type
-
-        self.control_panel: RoomControlPanel = self.generate_mock_control_panel()
-        self.light_units: list[LightUnit] = self.generate_mock_light_units()
-
-        self.connect_light_units_to_panel()
-
-    def generate_mock_control_panel(self) -> RoomControlPanel:
-        panel = RoomControlPanel(self)
-        return panel
-
-    def generate_mock_light_units(self) -> list[LightUnit]:
-        units = []
-        for _ in range(ROOM_CONFIGURATIONS[self.type]["light_count"]):
-            unit = LightUnit()
-            units.append(unit)
-
-        return units
-
-    def connect_light_units_to_panel(self):
-        for i, unit in enumerate(self.light_units):
-            label = ROOM_CONFIGURATIONS[self.type]["labels"][i]
-            self.control_panel.connect_light_unit(label, unit)
+        self.control_panel: RoomControlPanel = control_panel
+        self.light_units: list[LightUnit] = light_units

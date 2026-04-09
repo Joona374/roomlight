@@ -43,14 +43,15 @@ class RoomVisualizer(Widget):
             return "🟢 HI "
 
     def render(self) -> Text:
-        # 1. Create the dictionary of live light indicators
-        # We use .get() with a fallback to avoid crashes if a label is missing
+        # Keep rendering defensive so the demo still works even if
+        # a template label changes during development.
         lights = {
             label: self._light_indicator(label)
             for label in self.room.control_panel.connected_lights
         }
 
-        # 2. Decide which drawing method to call based on the room type
+        # Different layouts are rendered per room type to support the
+        # "one system, many room shapes" message in the prototype demo.
         if self.room.type == RoomType.SUITE:
             lines = self._render_suite(lights)
         elif self.room.type == RoomType.CONFERENCE:
@@ -60,14 +61,11 @@ class RoomVisualizer(Widget):
 
         return Text("\n".join(lines))
 
-
-
-
     def _render_normal(self, l: dict) -> list[str]:
         return [
             f"┌────────────────────────────┐",
-            f"│                            │",
-            f"│ {l.get('Entry', '  ---')}           {l.get('Main', '  ---')}    │",
+            f"                             │",
+            f"  {l.get('Entry', '  ---')}           {l.get('Main', '  ---')}    │",
             f"│                            │",
             f"├──    ──┐                   │",
             f"│        │                   │",
@@ -81,8 +79,8 @@ class RoomVisualizer(Widget):
         return [
             f"┌────────────────┬───────────┐",
             f"│ {l.get('Entry', '  ---')}         │   {l.get('Bathroom', '---')}  │",
-            f"│                │           │",
-            f"│                └─    ──────┤",
+            f"                 │           │",
+            f"                 └─    ──────┤",
             f"│                            │",
             f"├────    ──────┬─────    ────┤",
             f"│              │{l.get('Desk', '---')}       │",
