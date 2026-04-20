@@ -151,5 +151,25 @@
         "plus_text": "+"
       }
     ]
+  },
+  {
+    "id": "test",
+    "room_type_id": "conference",
+    "name": "Test",
+    "controls": [
+      {
+        "id": "all",
+        "kind": "toggle",
+        "label": "All",
+        "target": {
+          "mode": "all",
+          "labels": []
+        },
+        "behavior": "toggle",
+        "set_state": 20,
+        "on_state": 100,
+        "off_state": 0
+      }
+    ]
   }
 ]

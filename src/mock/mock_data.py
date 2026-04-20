@@ -7,6 +7,7 @@ from src.models.physical.floor import Floor
 from src.models.physical.property import Property
 from src.models.physical.room import Room
 from src.types.lightning_profile_catalog import LIGHTING_PROFILE_CATALOG
+from src.types.room_profile_assignment_store import ROOM_PROFILE_ASSIGNMENT_STORE
 from src.types.room_type_catalog import ROOM_TYPE_CATALOG
 from src.types.types import ProfileId, RoomTypeId
 
@@ -21,6 +22,8 @@ def create_mock_property(n_of_floors: int = 3, rooms_per_floor: int = 20) -> Pro
 
     for floor in hotel.floors[1:]:  # Skip the lobby floor with conference rooms
         add_mock_rooms_to_floor(floor, rooms_per_floor)
+
+    _apply_persisted_profile_assignments(hotel)
 
     return hotel
 
@@ -80,9 +83,30 @@ def build_mock_room(id: str, type: RoomTypeId, floor: int, room_number: int) -> 
     return room
 
 
-def _pick_default_profile_id(room_type_id: RoomTypeId) -> ProfileId | None:
+def _pick_default_profile_id(room_type_id: RoomTypeId | None) -> ProfileId | None:
     profiles = LIGHTING_PROFILE_CATALOG.get_for_room_type(room_type_id)
     return profiles[0].id if profiles else None
+
+
+def _apply_persisted_profile_assignments(property: Property) -> None:
+    ROOM_PROFILE_ASSIGNMENT_STORE.load()
+
+    for floor in property.floors:
+        for room in floor.rooms:
+            room_key = f"{room.floor}:{room.number}"
+            assigned_profile_id = ROOM_PROFILE_ASSIGNMENT_STORE.get(room_key)
+            if assigned_profile_id is None:
+                continue
+
+            profile = LIGHTING_PROFILE_CATALOG.get(assigned_profile_id)
+            if profile is None:
+                continue
+
+            # Keep assignment safe: only allow profile that matches room type.
+            if profile.room_type_id != room.type_id:
+                continue
+
+            room.profile_id = assigned_profile_id
 
 
 def connect_mock_property_to_system(property: Property, system: RoomLightSystem) -> None:
