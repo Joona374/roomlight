@@ -37,3 +37,10 @@ class RoomLightApp(App):
                 yield StaffView(self.roomlight)
 
         yield Footer()
+
+    def on_mount(self) -> None:
+        # Advance simulation time globally so staff timers keep running across view switches.
+        self.set_interval(1.0, self._tick_simulation_clock)
+
+    def _tick_simulation_clock(self) -> None:
+        self.roomlight.tick_one_minute()

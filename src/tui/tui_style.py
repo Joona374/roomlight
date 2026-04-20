@@ -282,4 +282,88 @@ LightInputRow {
 #assignment-apply-actions Button {
     width: 1fr;
 }
+
+#staff-checkout-content {
+    layout: horizontal;
+    width: 1fr;
+}
+
+#staff-checkout-filters {
+    width: 40;
+    padding: 0 1;
+    border-right: tall $primary;
+}
+
+#staff-checkout-actions {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#staff-checkout-floor-list,
+#staff-checkout-room-list {
+    height: 7;
+    margin-bottom: 1;
+}
+
+#staff-checkout-buttons {
+    height: auto;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#staff-checkout-buttons Button {
+    width: 1fr;
+}
+
+#staff-checkout-time-skip {
+    height: auto;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#staff-checkout-time-skip Button {
+    width: 1fr;
+}
+
+#staff-checkin-content {
+    layout: horizontal;
+    width: 1fr;
+}
+
+#staff-checkin-filters {
+    width: 40;
+    padding: 0 1;
+    border-right: tall $primary;
+}
+
+#staff-checkin-actions {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#staff-checkin-floor-list,
+#staff-checkin-room-list {
+    height: 7;
+    margin-bottom: 1;
+}
+
+#staff-checkin-buttons {
+    height: auto;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#staff-checkin-buttons Button {
+    width: 1fr;
+}
+
+#staff-checkin-time-skip {
+    height: auto;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#staff-checkin-time-skip Button {
+    width: 1fr;
+}
 """

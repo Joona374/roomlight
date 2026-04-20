@@ -15,6 +15,10 @@ class ConnectedPanel:
     def turn_lights_off_from_room(self):
         self.panel.turn_lights_off()
 
+    def turn_lights_on_dim_from_room(self):
+        for unit in self.panel.connected_lights.values():
+            unit.turn_on()
+
     def __str__(self) -> str:
         room_type = ROOM_TYPE_CATALOG.get_by_id(self.room.room_type_id)
         room_type_name = room_type.display_name if room_type else "Unknown Type"
