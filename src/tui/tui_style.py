@@ -243,4 +243,43 @@ LightInputRow {
     margin-top: 1;
     width: 100%;
 }
+
+#room-profile-assignment-content {
+    layout: horizontal;
+    width: 1fr;
+}
+
+#room-profile-filters-col {
+    width: 38;
+    padding: 0 1;
+    border-right: tall $primary;
+}
+
+#room-profile-rooms-col {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#assignment_floor_list,
+#assignment_room_type_list,
+#assignment_profile_list {
+    height: 6;
+    margin-bottom: 1;
+}
+
+#assignment_room_list {
+    height: 1fr;
+    margin-bottom: 1;
+}
+
+#assignment-actions,
+#assignment-apply-actions {
+    height: auto;
+    margin-bottom: 1;
+}
+
+#assignment-actions Button,
+#assignment-apply-actions Button {
+    width: 1fr;
+}
 """

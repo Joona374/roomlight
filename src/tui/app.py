@@ -30,7 +30,7 @@ class RoomLightApp(App):
             with TabPane("Config"):
                 # This view represents the configuration and setup options of the RoomLight system,
                 # so its more of a technical staff / admin view.
-                yield ConfigView(self.roomlight)
+                yield ConfigView(self.roomlight, self.hotel_property)
 
             with TabPane("Staff"):
                 # This view represents the interface used for daily operations by staff.
