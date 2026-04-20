@@ -1,19 +1,20 @@
 from src.models.logical.logical_floor import LogicalFloor
 from src.models.logical.logical_room import LogicalRoom
 from src.models.logical.room_light_system import RoomLightSystem
+
 from src.models.physical.light_unit import LightUnit
 from src.models.physical.room_control_panel import RoomControlPanel
 from src.models.physical.floor import Floor
 from src.models.physical.property import Property
 from src.models.physical.room import Room
-from src.types.lightning_profile_catalog import LIGHTING_PROFILE_CATALOG
-from src.types.room_profile_assignment_store import ROOM_PROFILE_ASSIGNMENT_STORE
-from src.types.room_type_catalog import ROOM_TYPE_CATALOG
+
 from src.types.types import ProfileId, RoomTypeId
+from src.types.lightning_profile_catalog import LIGHTING_PROFILE_CATALOG
+from src.types.room_profile_assignment_catalog import ROOM_PROFILE_ASSIGNMENT_CATALOG
+from src.types.room_type_catalog import ROOM_TYPE_CATALOG
 
 
 def create_mock_property(n_of_floors: int = 3, rooms_per_floor: int = 20) -> Property:
-    """Build a predictable demo hotel so the TUI always has realistic data to show."""
     hotel = Property("Test Hotel")
 
     add_mock_floors_to_property(hotel, n_of_floors)
@@ -89,12 +90,10 @@ def _pick_default_profile_id(room_type_id: RoomTypeId | None) -> ProfileId | Non
 
 
 def _apply_persisted_profile_assignments(property: Property) -> None:
-    ROOM_PROFILE_ASSIGNMENT_STORE.load()
-
     for floor in property.floors:
         for room in floor.rooms:
             room_key = f"{room.floor}:{room.number}"
-            assigned_profile_id = ROOM_PROFILE_ASSIGNMENT_STORE.get(room_key)
+            assigned_profile_id = ROOM_PROFILE_ASSIGNMENT_CATALOG.get(room_key)
             if assigned_profile_id is None:
                 continue
 

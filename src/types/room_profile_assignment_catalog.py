@@ -4,7 +4,7 @@ from pathlib import Path
 from src.types.types import ProfileId
 
 
-class RoomProfileAssignmentStore:
+class RoomProfileAssignmentCatalog:
     """Persistent mapping of room keys ("floor:number") to assigned profile IDs."""
 
     def __init__(self, path: str | None = None) -> None:
@@ -45,4 +45,4 @@ class RoomProfileAssignmentStore:
         self.assignments.pop(room_key, None)
 
 
-ROOM_PROFILE_ASSIGNMENT_STORE = RoomProfileAssignmentStore()
+ROOM_PROFILE_ASSIGNMENT_CATALOG = RoomProfileAssignmentCatalog()

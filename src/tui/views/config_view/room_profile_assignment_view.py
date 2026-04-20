@@ -5,7 +5,7 @@ from textual.widgets.option_list import Option
 
 from src.models.physical.property import Property
 from src.types.lightning_profile_catalog import LIGHTING_PROFILE_CATALOG
-from src.types.room_profile_assignment_store import ROOM_PROFILE_ASSIGNMENT_STORE
+from src.types.room_profile_assignment_catalog import ROOM_PROFILE_ASSIGNMENT_CATALOG
 from src.types.room_type_catalog import ROOM_TYPE_CATALOG
 from src.types.types import ProfileId, RoomTypeId
 
@@ -194,10 +194,10 @@ class RoomProfileAssignmentView(Vertical):
             if room.type_id != profile.room_type_id:
                 continue
             room.profile_id = profile.id
-            ROOM_PROFILE_ASSIGNMENT_STORE.set(self._room_key(room.floor, room.number), profile.id)
+            ROOM_PROFILE_ASSIGNMENT_CATALOG.set(self._room_key(room.floor, room.number), profile.id)
             applied_count += 1
 
-        ROOM_PROFILE_ASSIGNMENT_STORE.save()
+        ROOM_PROFILE_ASSIGNMENT_CATALOG.save()
 
         self._refresh_room_list()
 
