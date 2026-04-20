@@ -2,8 +2,11 @@ from src.mock.mock_data import create_mock_property, connect_mock_property_to_sy
 from src.models.logical.room_light_system import RoomLightSystem
 from src.tui.app import RoomLightApp
 from src.types.room_type_catalog import RoomTypeCatalog
+from src.types.lightning_profile_catalog import LIGHTING_PROFILE_CATALOG
 
 if __name__ == "__main__":
+    LIGHTING_PROFILE_CATALOG.load()
+
     # This models and represents the actual physical hardware and infrastructure of the hotel.
     # In the actual real world scenario this layer wouldnt be needed as we would be interacting with the real hardware,
     # in this demo / simulation we need to model the hardware and its interactions to be able to demonstrate the RoomLight system controlling it.

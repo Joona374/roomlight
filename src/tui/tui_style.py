@@ -104,6 +104,103 @@ LightInputRow {
     border-right: tall $primary;
 }
 
+#right-config-col {
+    width: 1fr;
+    padding: 1 2;
+}
+
+#profile-crud-view {
+    width: 1fr;
+    padding: 1 1;
+    border-right: tall $primary;
+}
+
+#panel-editor-view {
+    width: 2fr;
+    padding: 1 1;
+}
+
+#profile-crud-column {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#profile-meta-actions {
+    height: auto;
+    margin-top: 1;
+}
+
+#profile-meta-actions Button {
+    width: 1fr;
+}
+
+#panel-editor-content {
+    layout: horizontal;
+    width: 1fr;
+}
+
+#panel-editor-col-left {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#panel-editor-col-right {
+    width: 1fr;
+    padding: 0 1;
+    border-left: tall $surface;
+}
+
+#panel-control-save-actions {
+    height: auto;
+    margin-top: 1;
+}
+
+#panel-control-save-actions Button {
+    width: 1fr;
+}
+
+.hidden {
+    display: none;
+}
+
+#target-label-list {
+    height: 8;
+    margin-bottom: 1;
+}
+
+#control-list {
+    height: 5;
+    overflow-y: auto;
+    margin-bottom: 1;
+}
+
+#target-label-actions {
+    height: auto;
+    margin-bottom: 1;
+}
+
+#target-label-actions Button {
+    width: 1fr;
+}
+
+#toggle-behavior-actions {
+    height: auto;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#toggle-behavior-actions Button {
+    width: 1fr;
+}
+
+#toggle-behavior-status {
+    margin-bottom: 1;
+}
+
+#input_set_state {
+    margin-top: 1;
+}
+
 #right-lights-col {
     width: 1fr;
     padding: 1 2;

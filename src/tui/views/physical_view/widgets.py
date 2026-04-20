@@ -5,7 +5,7 @@ from rich.text import Text
 
 from src.models.physical.light_unit import LightUnit
 from src.models.physical.room import Room
-from src.types.types import RoomTypeId
+from src.types.types import AdjustControl, RoomTypeId, ToggleControl
 from src.types.types import Brightness
 
 
@@ -127,3 +127,21 @@ class RoomVisualizer(Widget):
         for label, indicator in l.items():
             box.append(f"{label}: {indicator}")
         return box
+
+
+class ProfileToggleButton(Button):
+    def __init__(self, control: ToggleControl, id: str):
+        super().__init__(control.label, id=id, classes="profile-btn")
+        self.control = control
+
+
+class ProfileAdjustDownButton(Button):
+    def __init__(self, control: AdjustControl, id: str):
+        super().__init__(control.minus_text, id=id, classes="profile-btn")
+        self.control = control
+
+
+class ProfileAdjustUpButton(Button):
+    def __init__(self, control: AdjustControl, id: str):
+        super().__init__(control.plus_text, id=id, classes="profile-btn")
+        self.control = control

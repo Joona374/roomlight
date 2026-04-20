@@ -1,11 +1,14 @@
 from __future__ import annotations
 import uuid
 from typing import TYPE_CHECKING
+from src.types.types import TargetMode
+from src.types.types import ToggleBehavior
 
 if TYPE_CHECKING:
     from src.models.physical.room import Room
     from src.models.physical.light_unit import LightUnit
     from src.models.logical.room_light_system import RoomLightSystem
+    from src.types.types import AdjustControl, ToggleControl, TargetMode, ToggleBehavior, Brightness
 
 class RoomControlPanel:
     """
@@ -46,3 +49,25 @@ class RoomControlPanel:
         """
         for unit in self.connected_lights.values():
             unit.turn_off()
+
+    def apply_toggle_control(self, control: ToggleControl) -> None:
+        units = self._get_target_units(control.target.mode, control.target.labels)
+        if control.behavior == ToggleBehavior.SET:
+            for unit in units:
+                unit.brightness = control.set_state
+        else:
+            for unit in units:
+                unit.brightness = control.on_state if unit.brightness == control.off_state else control.off_state
+
+    def apply_adjust_control(self, control: AdjustControl, direction: int) -> None:
+        units = self._get_target_units(control.target.mode, control.target.labels)
+        for unit in units:
+            if direction > 0:
+                unit.increase_brightness()
+            else:
+                unit.decrease_brightness()
+
+    def _get_target_units(self, mode: TargetMode, labels: list[str]):
+        if mode == TargetMode.ALL:
+            return list(self.connected_lights.values())
+        return [self.connected_lights[l] for l in labels if l in self.connected_lights]

@@ -6,8 +6,9 @@ from src.models.physical.room_control_panel import RoomControlPanel
 from src.models.physical.floor import Floor
 from src.models.physical.property import Property
 from src.models.physical.room import Room
+from src.types.lightning_profile_catalog import LIGHTING_PROFILE_CATALOG
 from src.types.room_type_catalog import ROOM_TYPE_CATALOG
-from src.types.types import RoomTypeId
+from src.types.types import ProfileId, RoomTypeId
 
 
 def create_mock_property(n_of_floors: int = 3, rooms_per_floor: int = 20) -> Property:
@@ -51,7 +52,7 @@ def build_mock_room(id: str, type: RoomTypeId, floor: int, room_number: int) -> 
     room_type = ROOM_TYPE_CATALOG.get_by_id(type)
     if not room_type:
         raise ValueError(f"Invalid room type id {type} for room {id}. Cannot build mock room.")
-    
+
     # 1. Pre build the correct number of light unites
     light_units_in_room_type = room_type.light_count
     light_units = [LightUnit() for _ in range(light_units_in_room_type)]
@@ -67,6 +68,7 @@ def build_mock_room(id: str, type: RoomTypeId, floor: int, room_number: int) -> 
         room_number=room_number,
         control_panel=panel,
         light_units=light_units,
+        profile_id=_pick_default_profile_id(type),
     )
     panel.attach_to_room(room)
 
@@ -76,6 +78,11 @@ def build_mock_room(id: str, type: RoomTypeId, floor: int, room_number: int) -> 
         panel.connect_light_unit(label, unit)
 
     return room
+
+
+def _pick_default_profile_id(room_type_id: RoomTypeId) -> ProfileId | None:
+    profiles = LIGHTING_PROFILE_CATALOG.get_for_room_type(room_type_id)
+    return profiles[0].id if profiles else None
 
 
 def connect_mock_property_to_system(property: Property, system: RoomLightSystem) -> None:

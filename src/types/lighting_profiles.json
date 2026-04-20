@@ -1,0 +1,155 @@
+[
+  {
+    "id": "standard-default",
+    "room_type_id": "standard",
+    "name": "Standard Default",
+    "controls": [
+      {
+        "id": "all-off",
+        "kind": "toggle",
+        "label": "All Off",
+        "target": {
+          "mode": "all",
+          "labels": []
+        },
+        "behavior": "set",
+        "set_state": 0,
+        "on_state": 20,
+        "off_state": 0
+      },
+      {
+        "id": "all-dim",
+        "kind": "toggle",
+        "label": "All Dim",
+        "target": {
+          "mode": "all",
+          "labels": []
+        },
+        "behavior": "set",
+        "set_state": 20,
+        "on_state": 20,
+        "off_state": 0
+      },
+      {
+        "id": "entry-adjust",
+        "kind": "adjust",
+        "label": "Entry +/-",
+        "target": {
+          "mode": "labels",
+          "labels": [
+            "Entry"
+          ]
+        },
+        "minus_text": "-",
+        "plus_text": "+"
+      }
+    ]
+  },
+  {
+    "id": "suite-default",
+    "room_type_id": "suite",
+    "name": "Suite Default",
+    "controls": [
+      {
+        "id": "all-off",
+        "kind": "toggle",
+        "label": "All Off",
+        "target": {
+          "mode": "all",
+          "labels": []
+        },
+        "behavior": "set",
+        "set_state": 0,
+        "on_state": 20,
+        "off_state": 0
+      },
+      {
+        "id": "living-off",
+        "kind": "toggle",
+        "label": "Living Off",
+        "target": {
+          "mode": "labels",
+          "labels": [
+            "Living"
+          ]
+        },
+        "behavior": "set",
+        "set_state": 0,
+        "on_state": 20,
+        "off_state": 0
+      },
+      {
+        "id": "bedroom-adjust",
+        "kind": "adjust",
+        "label": "Bedroom +/-",
+        "target": {
+          "mode": "labels",
+          "labels": [
+            "Bedroom"
+          ]
+        },
+        "minus_text": "-",
+        "plus_text": "+"
+      }
+    ]
+  },
+  {
+    "id": "conference-default",
+    "room_type_id": "conference",
+    "name": "Conference Default",
+    "controls": [
+      {
+        "id": "all-off",
+        "kind": "toggle",
+        "label": "All Off",
+        "target": {
+          "mode": "all",
+          "labels": []
+        },
+        "behavior": "set",
+        "set_state": 0,
+        "on_state": 20,
+        "off_state": 0
+      },
+      {
+        "id": "stage-on",
+        "kind": "toggle",
+        "label": "Stage On",
+        "target": {
+          "mode": "labels",
+          "labels": [
+            "Stage"
+          ]
+        },
+        "behavior": "set",
+        "set_state": 100,
+        "on_state": 100,
+        "off_state": 0
+      },
+      {
+        "id": "center-adjust",
+        "kind": "adjust",
+        "label": "Center +/-",
+        "target": {
+          "mode": "labels",
+          "labels": [
+            "Center"
+          ]
+        },
+        "minus_text": "-",
+        "plus_text": "+"
+      },
+      {
+        "id": "testi",
+        "kind": "adjust",
+        "label": "Testi",
+        "target": {
+          "mode": "all",
+          "labels": []
+        },
+        "minus_text": "-",
+        "plus_text": "+"
+      }
+    ]
+  }
+]
